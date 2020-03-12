@@ -50,15 +50,6 @@ const House = sequelize.define('house', {
 
 
 
-// Note: using `force: true` will drop the table if it already exists
-House.sync({ force: true }).then(() => {
-  // Now the `users` table in the database corresponds to the model definition
-  return House.create({
-    name: 'Anton',
-    address: 'Englishland'
-  });
-});
-
 
 
 
@@ -96,16 +87,41 @@ const User = sequelize.define('user', {
 });
 
 
+function populate_sample_data(){
 
-// Note: using `force: true` will drop the table if it already exists
-User.sync({ force: true }).then(() => {
-  // Now the `users` table in the database corresponds to the model definition
-  return User.create({
-    name: 'SonOfAnton',
-    type: 'staff',
-    user_level: 1, //1 for admin, 0 for normal
-  });
-});
+	// Note: using `force: true` will drop the table if it already exists
+	House.sync({ force: true }).then(() => {
+	  // Now the `users` table in the database corresponds to the model definition
+	  return House.create({
+	    name: 'Anton',
+	    address: 'Englishland'
+	  });
+	});
+
+
+
+	// Note: using `force: true` will drop the table if it already exists
+	User.sync({ force: true }).then(() => {
+	  // Now the `users` table in the database corresponds to the model definition
+	  return User.create({
+	    name: 'SonOfAnton',
+	    type: 'staff',
+	    user_level: 1, //1 for admin, 0 for normal
+	  });
+	});
+
+
+
+	// Note: using `force: true` will drop the table if it already exists
+	Claim.sync({ force: true }).then(() => {
+	  // Now the `users` table in the database corresponds to the model definition
+	  // return House.create({
+	  //   name: 'Anton',
+	  //   address: 'Englishland'
+	  // });
+	});
+
+}
 
 
 
@@ -167,39 +183,43 @@ const Claim = sequelize.define('claim', {
     allowNull: false
   },
 
+  product_name : {
+    type: Sequelize.STRING,
+    allowNull: false
+    
+  },
+
   amount: {
     type: Sequelize.FLOAT,
     allowNull: false
-    // allowNull defaults to true
+    
   },
   image: {
     type: Sequelize.BLOB,
     allowNull: true
-    // allowNull defaults to true
+    
   },
   houseID: {
     type: Sequelize.INTEGER,
     allowNull: true
-    // allowNull defaults to true
+    
   },
   approver_userID: {
     type: Sequelize.INTEGER,
     allowNull: true
-    // allowNull defaults to true
+    
   },
 
   status_: {
   	defaultValue: 'Pending',
     type: Sequelize.STRING,
     allowNull: false
-    // allowNull defaults to true
+    
   },
-
 
   time_updated: {
     type: Sequelize.DATE,
     allowNull: true
-    // allowNull defaults to true
   },
 
 
@@ -208,18 +228,38 @@ const Claim = sequelize.define('claim', {
 });
 
 
-
-// Note: using `force: true` will drop the table if it already exists
-Claim.sync({ force: true }).then(() => {
-  // Now the `users` table in the database corresponds to the model definition
-  // return House.create({
-  //   name: 'Anton',
-  //   address: 'Englishland'
-  // });
-});
+//House has many claims, users
+//users have many claims
+//houses have many residences
+//residneces have many users
 
 
 
+ // Author.associate = (models) => {
+ //    Author.hasMany(models.post);
+ //  };
+
+ //  return Author;
+
+
+
+
+sequelize.sync()
+
+
+
+//Inserts
+
+	//Residence
+
+	//Claim
+
+
+
+//retrieval
+
+
+//Updating a claim
 
 
 
