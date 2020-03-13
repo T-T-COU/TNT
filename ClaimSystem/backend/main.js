@@ -247,19 +247,219 @@ const Claim = sequelize.define('claim', {
 sequelize.sync()
 
 
+//USER CRUD
+function read_all_users(){
 
-//Inserts
+	return User.findAll().then(users => {
+		res = JSON.stringify(users, null, 4)
+	  // console.log("All users:", res);
 
-	//Residence
+	  return res
+	});
+}
 
-	//Claim
+function create_one_user(vars){
+
+	return User.create(vars).then(created => {
+  console.log(vars.name + " auto-generated ID:", created.userID);
+});
+
+}
+function delete_one_user(vars){
+
+	return User.destroy({
+	  where: {
+	    userID: vars.userID
+	  }
+	}).then(() => {
+	  console.log("Done");
+	});
+}
+
+
+function update_one_user(vars, new_vars){
+	return User.update({ new_vars }, {
+	  where: {
+	    userID: vars.userID
+	  }
+	}).then(() => {
+	  console.log("Done");
+	  return true
+	});	
+}
+
+
+//HOUSE CRUD
+
+function read_all_houses(){
+
+	return House.findAll().then(houses => {
+		res = JSON.stringify(houses, null, 4)
+	  console.log("All houses:", res);
+
+	  return res
+	});
+}
+
+function create_one_house(vars){
+
+	return House.create(vars).then(created => {
+  console.log(vars.name + " auto-generated ID:", created.houseID);
+});
+
+}
+function delete_one_house(vars){
+
+	return House.destroy({
+	  where: {
+	    houseID: vars.houseID
+	  }
+	}).then(() => {
+	  console.log("Done");
+	});
+}
+
+
+function update_one_house(vars, new_vars){
+	return House.update({ new_vars }, {
+	  where: {
+	    houseID: vars.houseID
+	  }
+	}).then(() => {
+	  console.log("Done");
+	  return true
+	});	
+}
 
 
 
-//retrieval
+//RESIDENCE CRUD
+function read_all_residences(){
+
+	return Residence.findAll().then(r => {
+		res = JSON.stringify(r, null, 4)
+	  console.log("All Residence:", res);
+
+	  return res
+	});
+}
 
 
-//Updating a claim
+
+function create_one_residence(vars){
+
+	return Residence.create(vars).then(created => {
+  console.log(vars.name + " auto-generated ID:", created.residenceID);
+});
+
+}
+function delete_one_residence(vars){
+
+	return Residence.destroy({
+	  where: {
+	    residenceID: vars.residenceID
+	  }
+	}).then(() => {
+	  console.log("Done");
+	});
+}
+
+
+function update_one_residence(vars, new_vars){
+	return Residence.update({ new_vars }, {
+	  where: {
+	    residenceID: vars.residenceID
+	  }
+	}).then(() => {
+	  console.log("Done");
+	  return true
+	});	
+}
+
+
+//CLAIM CRUD
+function read_all_claims(){
+
+	return Claim.findAll().then(c => {
+		res = JSON.stringify(c, null, 4)
+	  // console.log("All Claim:", res);
+
+	  return res
+	});
+}
+
+
+//claims submitted/belonging to a userID
+function read_all_belonging_to_user(vars){
+	return Claim.findAll({
+		where: {
+	    userID: vars.userID
+	  }
+
+
+	}).then(c => {
+		res = JSON.stringify(c, null, 4)
+	  console.log("All Claim:", res);
+
+	  return res
+	});
+}
+
+
+//claims submitted/belonging to a userID
+function read_all_belonging_to_house(vars){
+	return Claim.findAll({
+		where: {
+	    houseID: vars.houseID
+	  }
 
 
 
+	}).then(c => {
+		res = JSON.stringify(c, null, 4)
+	  console.log("All Claim:", res);
+
+	  return res
+	});
+}
+
+function create_one_claim(vars){
+
+	return Claim.create(vars).then(created => {
+  console.log(vars.name + " auto-generated ID:", created.claimID);
+});
+
+}
+function delete_one_claim(vars){
+
+	return Claim.destroy({
+	  where: {
+	    claimID: vars.claimID
+	  }
+	}).then(() => {
+	  console.log("Done");
+	});
+}
+
+
+function update_one_house(vars, new_vars){
+	return Claim.update({ new_vars }, {
+	  where: {
+	    claimID: vars.claimID
+	  }
+	}).then(() => {
+	  console.log("Done");
+	  return true
+	});	
+}
+
+
+// delete_one_user(4)
+// delete_one_user(5)
+// delete_one_user(6)
+// create_one_user({"name":"SonsOfAntonTwo","type":"Tenant","user_level":0})
+// read_all_users()
+
+//returns a promise object
+users = read_all_users()
+console.log(users)
