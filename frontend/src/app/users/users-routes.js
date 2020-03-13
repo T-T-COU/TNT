@@ -6,9 +6,11 @@ import AppSignup from './signup/signup.vue';
 
 import AppBilling from './billing/billing.vue';
 
+import AppViewer from './viewer/viewer.vue';
+
 const userRoutes = [
   {
-    path: '/users',
+    path: '/',
     component: AppUsers,
     children: [
       {
@@ -25,6 +27,11 @@ const userRoutes = [
         path: 'billing',
         name: 'billing',
         component: AppBilling
+      },
+      {
+        path: 'viewer',
+        name: 'viewer',
+        component: AppViewer
       },
       {
         path: '',
