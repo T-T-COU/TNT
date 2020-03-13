@@ -1,7 +1,5 @@
 import AppUsers from './users.vue';
 
-import AppUserList from './user-list/user-list.vue';
-
 import AppHome from './home/home.vue';
 
 import AppSignup from './signup/signup.vue';
