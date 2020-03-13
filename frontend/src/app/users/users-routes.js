@@ -1,23 +1,18 @@
 import AppUsers from './users.vue';
 
-import AppUserList from './user-list/user-list.vue';
-
 import AppHome from './home/home.vue';
 
 import AppSignup from './signup/signup.vue';
 
 import AppBilling from './billing/billing.vue';
 
+import AppViewer from './viewer/viewer.vue';
+
 const userRoutes = [
   {
-    path: '/users',
+    path: '/',
     component: AppUsers,
     children: [
-      {
-        path: 'user-list',
-        name: 'user-list',
-        component: AppUserList
-      },
       {
         path: 'home',
         name: 'home',
@@ -34,8 +29,13 @@ const userRoutes = [
         component: AppBilling
       },
       {
+        path: 'viewer',
+        name: 'viewer',
+        component: AppViewer
+      },
+      {
         path: '',
-        redirect: { name: 'user-list' }
+        redirect: { name: 'home' }
       }
     ]
   }

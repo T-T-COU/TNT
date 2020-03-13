@@ -1,8 +1,6 @@
-[![Build Status](https://travis-ci.org/arunredhu/orders-app.svg?branch=master)](https://travis-ci.org/arunredhu/vuejs_boilerplate)
+# Fronend basement
 
-# Vue.js boilerplate
-
-This boilerplate is built on the top of Vue CLI 3.0. This provides an architecture which helps to write a flexible & modular large scale appliction with Vue.js
+This frontend is built based on the [Vue.js boilerplace](https://github.com/arunredhu/vuejs_boilerplate).
 
 # Description
 
@@ -43,6 +41,3 @@ npm run test
 npm run lint
 ```
 
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).

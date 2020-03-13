@@ -6,7 +6,7 @@
       <h1>Billing Management System</h1>
       <p>
         <a href="#" class="btn btn-primary my-2">Register New Staff</a>
-        <a href="./billing.html" class="btn btn-secondary my-2">Billing</a>
+        <a href="./billing" class="btn btn-secondary my-2">Billing</a>
         <a href="#" class="btn btn-secondary my-2">Viewer</a>
       </p>
     </div>
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "app-user-item"
+  name: ""
 };
 </script>
 

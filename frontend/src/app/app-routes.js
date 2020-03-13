@@ -10,7 +10,7 @@ Vue.use(Router);
 const appRoutes = [
   {
     path: '/',
-    redirect: '/users'
+    redirect: '/home'
   },
   {
     path: '*',
