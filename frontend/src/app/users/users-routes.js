@@ -13,11 +13,11 @@ const userRoutes = [
     path: '/users',
     component: AppUsers,
     children: [
-      {
-        path: 'user-list',
-        name: 'user-list',
-        component: AppUserList
-      },
+      // {
+      //   path: 'user-list',
+      //   name: 'user-list',
+      //   component: AppUserList
+      // },
       {
         path: 'home',
         name: 'home',
@@ -35,7 +35,7 @@ const userRoutes = [
       },
       {
         path: '',
-        redirect: { name: 'user-list' }
+        redirect: { name: 'home' }
       }
     ]
   }
