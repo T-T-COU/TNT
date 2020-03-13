@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: "app-user-item"
+  name: ""
 };
 </script>
 
