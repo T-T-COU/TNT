@@ -4,9 +4,12 @@ import Util from '../utils/Utils';
 const util = new Util();
 
 class UserController {
+
+  
+
   static async getAllUsers(req, res) {
     try {
-      console.log("In controller")
+      
       const allusers = await userService.getAllUsers();
       if (allusers.length > 0) {
         util.setSuccess(200, 'users retrieved', allusers);
@@ -22,11 +25,17 @@ class UserController {
   }
 
   static async addUser(req, res) {
-    if (!req.body.title || !req.body.price || !req.body.description) {
+    console.log("Add user called")
+    console.log(req.body)
+    // console.log(req)
+    if (!req.body.name || !req.body.type || !req.body.user_level) {
       util.setError(400, 'Please provide complete details');
       return util.send(res);
     }
     const newUser = req.body;
+
+
+
     try {
       const createdUser = await userService.addUser(newUser);
       util.setSuccess(201, 'User Added!', createdUser);
@@ -47,10 +56,10 @@ class UserController {
     }
     try {
       const updatedUser = await userService.updateUser(id, alteredUser);
-      if (!updateUser) {
+      if (!updatedUser) {
         util.setError(404, `Cannot find user with the id: ${id}`);
       } else {
-        util.setSuccess(200, 'user updated', updateUser);
+        util.setSuccess(200, 'user updated', updatedUser);
       }
       return util.send(res);
     } catch (error) {
@@ -107,6 +116,31 @@ class UserController {
       return util.send(res);
     }
   }
+
+  static async director(req, res){
+    try{
+
+      switch (req.body.dir){
+        case "update":
+        return UserController.updateUser(req,res)
+          break
+        case "del":
+          return UserController.deleteUser(req,res)
+          break
+        default:
+        return util.setError(400,"Unknown function")
+          break
+
+      }
+
+
+    } catch (error) {
+      console.log(error)
+      util.setError(400,error)
+      return util.send(res)
+    }
+  }
+
 }
 
 export default UserController;

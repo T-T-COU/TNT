@@ -5,11 +5,13 @@ import userRoutes from './server/routes/UserRoutes';
 import houseRoutes from './server/routes/HouseRoutes';
 import residenceRoutes from './server/routes/ResidenceRoutes';
 import claimRoutes from './server/routes/ClaimRoutes';
+const cors = require('cors')
 
 config.config();
 
 const app = express();
 
+app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

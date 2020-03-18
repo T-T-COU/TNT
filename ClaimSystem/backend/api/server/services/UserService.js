@@ -15,7 +15,7 @@ class UserService {
 
   static async addUser(newUser) {
     try {
-      return await database.users.create(newUser);
+      return await database.Users.create(newUser);
     } catch (error) {
       throw error;
     }
@@ -24,24 +24,25 @@ class UserService {
   static async updateUser(id, updateUser) {
     try {
       
-      const userToUpdate = await database.users.findOne({
-        where: { id: Number(id) }
+      const userToUpdate = await database.Users.findOne({
+        where: { userID: Number(id) }
       });
 
       if (userToUpdate) {
-        await database.users.update(updateUser, { where: { id: Number(id) } });
+        await database.Users.update(updateUser, { where: { userID: Number(id) } });
 
         return updateUser;
       }
       return null;
     } catch (error) {
+      console.log(error)
       throw error;
     }
   }
 
   static async getAUser(id) {
     try {
-      const user = await database.users.findOne({
+      const user = await database.Users.findOne({
         where: { id: Number(id) }
       });
 
@@ -53,11 +54,12 @@ class UserService {
 
   static async deleteUser(id) {
     try {
-      const userToDelete = await database.users.findOne({ where: { id: Number(id) } });
+      console.log("Delete user called")
+      const userToDelete = await database.Users.findOne({ where: { userID: Number(id) } });
 
       if (userToDelete) {
-        const deletedUser = await database.users.destroy({
-          where: { id: Number(id) }
+        const deletedUser = await database.Users.destroy({
+          where: { userID: Number(id) }
         });
         return deletedUser;
       }
