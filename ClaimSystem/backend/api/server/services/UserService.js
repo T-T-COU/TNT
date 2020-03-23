@@ -43,7 +43,7 @@ class UserService {
   static async getAUser(id) {
     try {
       const user = await database.Users.findOne({
-        where: { id: Number(id) }
+        where: { userID: Number(id) }
       });
 
       return user;

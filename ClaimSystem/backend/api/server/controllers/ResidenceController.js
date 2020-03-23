@@ -22,7 +22,7 @@ class ResidenceController {
   }
 
   static async addResidence(req, res) {
-    if (!req.body.title || !req.body.price || !req.body.description) {
+    if (!req.body.userID || !req.body.houseID) {
       util.setError(400, 'Please provide complete details');
       return util.send(res);
     }
@@ -47,10 +47,10 @@ class ResidenceController {
     }
     try {
       const updatedResidence = await ResidenceService.updateResidence(id, alteredResidence);
-      if (!updateResidence) {
+      if (!updatedResidence) {
         util.setError(404, `Cannot find Residence with the id: ${id}`);
       } else {
-        util.setSuccess(200, 'Residence updated', updateResidence);
+        util.setSuccess(200, 'Residence updated', updatedResidence);
       }
       return util.send(res);
     } catch (error) {
@@ -105,6 +105,30 @@ class ResidenceController {
       console.log(error)
       util.setError(400, error);
       return util.send(res);
+    }
+  }
+
+  static async director(req, res){
+    try{
+
+      switch (req.body.dir){
+        case "update":
+        return ResidenceController.updateResidence(req,res)
+          break
+        case "del":
+          return ResidenceController.deleteResidence(req,res)
+          break
+        default:
+        return util.setError(400,"Unknown function")
+          break
+
+      }
+
+
+    } catch (error) {
+      console.log(error)
+      util.setError(400,error)
+      return util.send(res)
     }
   }
 }

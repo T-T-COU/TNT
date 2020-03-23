@@ -3,7 +3,7 @@ import Util from '../utils/Utils';
 
 const util = new Util();
 
-class claimController {
+class ClaimController {
   static async getAllClaims(req, res) {
     try {
       console.log("In controller")
@@ -22,8 +22,9 @@ class claimController {
   }
 
   static async addClaim(req, res) {
-    if (!req.body.title || !req.body.price || !req.body.description) {
-      util.setError(400, 'Please provide complete details');
+    console.log(req.body)
+    if (!req.body.product_name || !req.body.amount || !req.body.houseID || !req.body.userID) {
+      util.setError(400, 'Please provide complete details: product_name, amount, houseID, userID');
       return util.send(res);
     }
     const newclaim = req.body;
@@ -39,6 +40,8 @@ class claimController {
   }
 
   static async updateClaim(req, res) {
+    console.log(req.body)
+
     const alteredclaim = req.body;
     const { id } = req.params;
     if (!Number(id)) {
@@ -47,10 +50,10 @@ class claimController {
     }
     try {
       const updatedclaim = await claimService.updateClaim(id, alteredclaim);
-      if (!updateclaim) {
+      if (!updatedclaim) {
         util.setError(404, `Cannot find claim with the id: ${id}`);
       } else {
-        util.setSuccess(200, 'claim updated', updateclaim);
+        util.setSuccess(200, 'claim updated', updatedclaim);
       }
       return util.send(res);
     } catch (error) {
@@ -107,6 +110,31 @@ class claimController {
       return util.send(res);
     }
   }
+
+  static async director(req, res){
+    try{
+
+      switch (req.body.dir){
+        case "update":
+        return ClaimController.updateClaim(req,res)
+          break
+        case "del":
+          return ClaimController.deleteClaim(req,res)
+          break
+        default:
+        return util.setError(400,"Unknown function")
+          break
+
+      }
+
+
+    } catch (error) {
+      console.log(error)
+      util.setError(400,error)
+      return util.send(res)
+    }
+  }
+
 }
 
-export default claimController;
+export default ClaimController;

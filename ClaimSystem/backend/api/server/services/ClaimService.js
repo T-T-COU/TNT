@@ -21,15 +21,15 @@ class claimService {
     }
   }
 
-  static async updateClaim(id, updateclaim) {
+  static async updateClaim(id, updatedClaim) {
     try {
       
       const claimToUpdate = await database.claims.findOne({
-        where: { id: Number(id) }
+        where: { claimID: Number(id) }
       });
 
       if (claimToUpdate) {
-        await database.claims.update(updateclaim, { where: { id: Number(id) } });
+        await database.claims.update(updatedClaim, { where: { claimID: Number(id) } });
 
         return claimToUpdate;
       }
@@ -42,7 +42,7 @@ class claimService {
   static async getAClaim(id) {
     try {
       const claim = await database.claims.findOne({
-        where: { id: Number(id) }
+        where: { claimID: Number(id) }
       });
 
       return claim;
@@ -53,11 +53,11 @@ class claimService {
 
   static async deleteClaim(id) {
     try {
-      const claimToDelete = await database.claims.findOne({ where: { id: Number(id) } });
+      const claimToDelete = await database.claims.findOne({ where: { claimID: Number(id) } });
 
       if (claimToDelete) {
         const deletedclaim = await database.claims.destroy({
-          where: { id: Number(id) }
+          where: { claimID: Number(id) }
         });
         return deletedclaim;
       }

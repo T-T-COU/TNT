@@ -25,11 +25,11 @@ class houseService {
     try {
       
       const houseToUpdate = await database.houses.findOne({
-        where: { id: Number(id) }
+        where: { houseID: Number(id) }
       });
 
       if (houseToUpdate) {
-        await database.houses.update(updatehouse, { where: { id: Number(id) } });
+        await database.houses.update(updatehouse, { where: { houseID: Number(id) } });
 
         return updatehouse;
       }
@@ -42,7 +42,7 @@ class houseService {
   static async getAHouse(id) {
     try {
       const house = await database.houses.findOne({
-        where: { id: Number(id) }
+        where: { houseID: Number(id) }
       });
 
       return house;
@@ -53,11 +53,11 @@ class houseService {
 
   static async deleteHouse(id) {
     try {
-      const houseToDelete = await database.houses.findOne({ where: { id: Number(id) } });
+      const houseToDelete = await database.houses.findOne({ where: { houseID: Number(id) } });
 
       if (houseToDelete) {
         const deletedhouse = await database.houses.destroy({
-          where: { id: Number(id) }
+          where: { houseID: Number(id) }
         });
         return deletedhouse;
       }

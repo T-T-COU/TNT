@@ -3,7 +3,7 @@ import Util from '../utils/Utils';
 
 const util = new Util();
 
-class houseController {
+class HouseController {
   static async getAllhouses(req, res) {
     try {
       console.log("In controller")
@@ -22,8 +22,8 @@ class houseController {
   }
 
   static async addhouse(req, res) {
-    if (!req.body.title || !req.body.price || !req.body.description) {
-      util.setError(400, 'Please provide complete details');
+    if (!req.body.name) {
+      util.setError(400, 'Please provide complete details: name');
       return util.send(res);
     }
     const newhouse = req.body;
@@ -38,7 +38,7 @@ class houseController {
     }
   }
 
-  static async updatehouse(req, res) {
+  static async updateHouse(req, res) {
     const alteredhouse = req.body;
     const { id } = req.params;
     if (!Number(id)) {
@@ -47,10 +47,10 @@ class houseController {
     }
     try {
       const updatedhouse = await houseService.updateHouse(id, alteredhouse);
-      if (!updatehouse) {
+      if (!updatedhouse) {
         util.setError(404, `Cannot find house with the id: ${id}`);
       } else {
-        util.setSuccess(200, 'house updated', updatehouse);
+        util.setSuccess(200, 'house updated', updatedhouse);
       }
       return util.send(res);
     } catch (error) {
@@ -84,7 +84,7 @@ class houseController {
     }
   }
 
-  static async deletehouse(req, res) {
+  static async deleteHouse(req, res) {
     const { id } = req.params;
 
     if (!Number(id)) {
@@ -107,6 +107,30 @@ class houseController {
       return util.send(res);
     }
   }
+
+  static async director(req, res){
+    try{
+
+      switch (req.body.dir){
+        case "update":
+        return HouseController.updateHouse(req,res)
+          break
+        case "del":
+          return HouseController.deleteHouse(req,res)
+          break
+        default:
+        return util.setError(400,"Unknown function")
+          break
+
+      }
+
+
+    } catch (error) {
+      console.log(error)
+      util.setError(400,error)
+      return util.send(res)
+    }
+  }
 }
 
-export default houseController;
+export default HouseController;

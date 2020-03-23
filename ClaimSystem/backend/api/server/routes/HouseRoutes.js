@@ -5,8 +5,7 @@ const router = Router();
 
 router.get('/', HouseController.getAllhouses);
 router.get('/:id', HouseController.getAhouse);
-router.put('/:id', HouseController.updatehouse);
 router.post('/', HouseController.addhouse);
-router.delete('/:id', HouseController.deletehouse);
+router.post('/:id', HouseController.director);
 
 export default router;
