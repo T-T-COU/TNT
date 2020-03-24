@@ -1,4 +1,7 @@
 import claimService from '../services/ClaimService';
+import userService from '../services/UserService';
+import houseService from '../services/HouseService';
+
 import Util from '../utils/Utils';
 
 const util = new Util();
@@ -22,7 +25,8 @@ class ClaimController {
   }
 
   static async addClaim(req, res) {
-    console.log(req.body)
+    console.log(req.file)
+    console.log(req.image)
     if (!req.body.product_name || !req.body.amount || !req.body.houseID || !req.body.userID) {
       util.setError(400, 'Please provide complete details: product_name, amount, houseID, userID');
       return util.send(res);
@@ -72,12 +76,20 @@ class ClaimController {
     }
 
     try {
-      const claim = await claimService.getAClaim(id);
+      var claim = await claimService.getAClaim(id);
 
       if (!claim) {
         util.setError(404, `Cannot find claim with the id ${id}`);
       } else {
-        util.setSuccess(200, 'Found claim', claim);
+
+        //Get users here
+        const userObj = await userService.getAUser(claim.userID);
+
+        const approver_userObj = await userService.getAUser(claim.approver_userID);
+
+        const house = await houseService.getAHouse(claim.houseID);
+
+        util.setSuccess(200, 'Found claim, claimant, approver', {'claim': claim, 'claimant': userObj, 'approver': approver_userObj, 'house': house});
       }
       return util.send(res);
     } catch (error) {
