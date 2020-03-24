@@ -7,7 +7,7 @@
       <p>
         <a href="./signup" class="btn btn-primary my-2">Register New Staff</a>
         <a href="./billing" class="btn btn-secondary my-2">Billing</a>
-        <a href="#" class="btn btn-secondary my-2">Viewer</a>
+        <a href="./viewer" class="btn btn-secondary my-2">Viewer</a>
       </p>
     </div>
   </section>
