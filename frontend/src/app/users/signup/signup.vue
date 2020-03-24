@@ -18,15 +18,15 @@
                 <div class="form-group">
                     <label for="user_type">User Type</label>
                     <select class="form-control" name="user_type" id="user_type">
-                        <option value="staff">staff</option>
-                        <option value="tenant">tenant</option>
+                        <option value="staff">Staff</option>
+                        <option value="tenant">Tenant</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="user_level">User Level</label>
                     <select class="form-control" name="user_level" id="user_level">
-                        <option value=""></option>
-                        <option value=""></option>
+                        <option value="manager">Manager-level</option>
+                        <option value="staff">Staff-level</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
